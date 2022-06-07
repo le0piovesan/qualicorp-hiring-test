@@ -1,0 +1,199 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --vt-c-white: #ffffff;
+  --vt-c-white-soft: #f8f8f8;
+  --vt-c-white-mute: #f2f2f2;
+
+  --vt-c-black: #181818;
+  --vt-c-black-soft: #222222;
+  --vt-c-black-mute: #282828;
+
+  --vt-c-indigo: #2c3e50;
+
+  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
+  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
+  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+
+  --vt-c-text-light-1: var(--vt-c-indigo);
+  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
+  --vt-c-text-dark-1: var(--vt-c-white);
+  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+}
+
+/* semantic color variables for this project */
+:root {
+  --color-background: var(--vt-c-white);
+  --color-background-soft: var(--vt-c-white-soft);
+  --color-background-mute: var(--vt-c-white-mute);
+
+  --color-border: var(--vt-c-divider-light-2);
+  --color-border-hover: var(--vt-c-divider-light-1);
+
+  --color-heading: var(--vt-c-text-light-1);
+  --color-text: var(--vt-c-text-light-1);
+
+  --section-gap: 160px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--vt-c-black);
+    --color-background-soft: var(--vt-c-black-soft);
+    --color-background-mute: var(--vt-c-black-mute);
+
+    --color-border: var(--vt-c-divider-dark-2);
+    --color-border-hover: var(--vt-c-divider-dark-1);
+
+    --color-heading: var(--vt-c-text-dark-1);
+    --color-text: var(--vt-c-text-dark-2);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  background-color: #eee;
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1.6;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+}
+
+.container {
+  width: 100%;
+  margin-top: 30px;
+  margin: 32px auto;
+  background-color: #fff;
+  text-align: center;
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.logo {
+  color: #171a88;
+}
+
+a {
+  text-decoration: none;
+  color: #ffb61e;
+  font-size: 20px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: #ffb81e45;
+    transition: 0.4s;
+    border-radius: 5px;
+  }
+}
+
+nav {
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+nav a.router-link-exact-active {
+  color: var(--color-text);
+  font-weight: bold;
+}
+
+nav a.router-link-exact-active:hover {
+  background-color: transparent;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0 1rem;
+  border-left: 1px solid var(--color-border);
+}
+
+nav a:first-of-type {
+  border: 0;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+form {
+  width: 80%;
+  margin: 32px auto;
+  background-color: #fff;
+  text-align: left;
+  padding: 30px;
+  border-radius: 10px;
+}
+label {
+  color: #aaa;
+  display: inline-block;
+  margin: 20px 0 10px;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+input,
+select {
+  display: block;
+  padding: 10px 6px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  color: #555;
+  background-color: #fff;
+}
+input[type="checkbox"] {
+  display: inline-block;
+  width: 16px;
+  font-size: 20px;
+  margin: 0 10px 0 0;
+  position: relative;
+  top: 2px;
+}
+.bold {
+  font-weight: bolder;
+  color: #ffb61e;
+}
+button {
+  background: #171a88;
+  border: 0;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 20px;
+  margin-top: 5px;
+}
+@media (hover: hover) {
+  button:hover {
+    background-color: #5153a6;
+    transition: 0.2s;
+    cursor: pointer;
+  }
+}
