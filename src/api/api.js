@@ -3,11 +3,19 @@ const app = express();
 const model = require("./model");
 var cors = require("cors");
 
-const port = process.env.PORT || 8888;
-
 app.use(cors());
 
+app.use(
+  cors({
+    origin:
+      "http://localhost:3000" || "https://qualicorp-hiring-test.netlify.app/",
+    credentials: true,
+  })
+);
+
 app.use(express.json());
+
+const port = process.env.PORT || 8888;
 
 app.get("/", async (req, res) => {
   const result = await model.findAll();
