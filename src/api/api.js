@@ -1,26 +1,16 @@
 const express = require("express");
 const app = express();
 const model = require("./model");
-const cors = require("cors");
+app.use(express.json());
 
-const corsOptions = { origin: process.env.URL || "*", credentials: true };
-
-app.use(cors(corsOptions));
-
-app.use((req, res, next) => {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested, Content-Type, Accept Authorization"
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
-  if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE");
-    return res.status(200).json({});
-  }
   next();
 });
-
-app.use(express.json());
 
 const port = process.env.PORT || 8888;
 

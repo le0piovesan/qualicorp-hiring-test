@@ -15,13 +15,7 @@ export default {
     fetch(
       process.env.NODE_ENV === "development"
         ? "http://localhost:8888"
-        : "https://qualicorp-hiring-test.herokuapp.com",
-      {
-        mode: "cors",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
+        : "https://qualicorp-hiring-test.herokuapp.com"
     )
       .then((res) => res.json())
       .then((data) => {
