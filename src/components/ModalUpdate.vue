@@ -1,8 +1,13 @@
 <script setup>
+import Loading from "@/components/Loading.vue";
+
 defineProps({
   userid: {
-    type: String,
+    type: Object,
     required: true,
+  },
+  reload: {
+    type: Function,
   },
 });
 </script>
@@ -11,14 +16,15 @@ defineProps({
 export default {
   data() {
     return {
-      id: "",
-      name: "",
-      email: "",
-      cpf: "",
-      phone: "",
+      id: this.userid.id,
+      name: this.userid.name,
+      email: this.userid.email,
+      cpf: this.userid.cpf,
+      phone: this.userid.phone,
       ufList: [],
-      uf: "",
-      qualiClient: "",
+      uf: this.userid.uf,
+      qualiClient: this.userid.qualiClient,
+      loading: false,
     };
   },
   mounted() {
@@ -31,25 +37,12 @@ export default {
           });
         })
         .catch((err) => console.warn(err)),
-      fetch(`http://localhost:8888/${this.userid}`)
-        .then((res) => res.json())
-        .then((data) => {
-          const { name, email, cpf, phone, uf, qualiClient } = data;
-
-          this.name = name;
-          this.email = email;
-          this.cpf = cpf;
-          this.phone = phone;
-          this.uf = uf;
-          this.qualiClient = qualiClient;
-        })
-        .catch((err) => {
-          console.log(err);
-        }),
     ]);
   },
   methods: {
     handleUpdate() {
+      this.loading = true;
+
       const updateClient = {
         name: this.name,
         email: this.email,
@@ -58,7 +51,22 @@ export default {
         uf: this.uf,
         qualiClient: this.qualiClient,
       };
-      console.log(updateClient);
+
+      fetch(`http://localhost:8888/${this.userid.id}`, {
+        method: "PUT",
+        body: JSON.stringify(updateClient),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          this.loading = false;
+          this.$emit("close");
+          this.$router.go();
+        })
+        .catch((err) => {
+          console.log(err);
+          this.loading = false;
+        });
     },
   },
 };
@@ -66,6 +74,7 @@ export default {
 <template>
   <div class="modal-container">
     <div class="modal">
+      <button type="button" class="close" @click="$emit('close')">X</button>
       <form @submit.prevent="handleUpdate">
         <label>Nome:</label>
         <input type="text" required v-model="name" ref="name" />
@@ -90,7 +99,8 @@ export default {
         <label>Cliente possui <span class="bold">quali</span>seguro</label>
 
         <div class="centered-text">
-          <button>Atualizar Cliente</button>
+          <Loading v-if="loading" :loading="loading" />
+          <button v-else>Atualizar Cliente</button>
         </div>
       </form>
     </div>
