@@ -12,6 +12,7 @@ app.use(express.json());
 app.get("/", async (req, res) => {
   const result = await model.findAll();
   res.json(result);
+  res.send("oi do servidor");
 });
 
 app.get("/:id", async (req, res) => {
