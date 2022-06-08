@@ -9,6 +9,31 @@ defineProps({
 });
 </script>
 
+<script>
+export default {
+  methods: {
+    handleDelete(id, name) {
+      const confirmation = confirm(
+        `Deseja mesmo excluir o(a) cliente ${name}?`
+      );
+
+      if (confirmation) {
+        fetch(`http://localhost:8888/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
+  },
+};
+</script>
+
 <template>
   <table class="container" v-if="listdata.length > 0">
     <thead>
@@ -23,7 +48,7 @@ defineProps({
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(value, index) in listdata" :key="index">
+      <tr v-for="value in listdata" :key="value.id">
         <th>{{ value.name }}</th>
         <th>{{ value.cpf }}</th>
         <th>{{ value.email }}</th>
@@ -31,10 +56,20 @@ defineProps({
         <th>{{ value.uf }}</th>
         <th v-if="value.qualiClient">Possui</th>
         <th v-else>Não Possui</th>
-        <RouterLink :to="{ name: 'Update', params: { id: value.id } }"
-          >Editar</RouterLink
-        >
-        <th>Excluir</th>
+
+        <!-- <RouterLink :to="{ name: 'Update', params: { id: value.id } }"
+          ><img src="../assets/edit.svg" alt="Delete todo"
+        /></RouterLink> -->
+
+        <th class="todo-button">
+          <img src="../assets/edit.svg" alt="Edit" title="Editar Cliente" />
+          <img
+            src="../assets/delete.svg"
+            alt="Delete"
+            title="Deletar Cliente"
+            @click="handleDelete(value.id, value.name)"
+          />
+        </th>
       </tr>
     </tbody>
   </table>

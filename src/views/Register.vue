@@ -30,35 +30,31 @@ export default {
   },
   methods: {
     handleSubmit() {
-      try {
-        this.loading = true;
+      this.loading = true;
 
-        const newClient = {
-          name: this.name,
-          email: this.email,
-          cpf: this.cpf,
-          phone: this.phone,
-          uf: this.uf,
-          qualiClient: this.qualiClient,
-        };
+      const newClient = {
+        name: this.name,
+        email: this.email,
+        cpf: this.cpf,
+        phone: this.phone,
+        uf: this.uf,
+        qualiClient: this.qualiClient,
+      };
 
-        fetch("http://localhost:8888", {
-          method: "POST",
-          body: JSON.stringify(newClient),
-          headers: { "Content-type": "application/json; charset=UTF-8" },
+      fetch("http://localhost:8888", {
+        method: "POST",
+        body: JSON.stringify(newClient),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          this.loading = false;
+          this.$router.push({ name: "Home" });
         })
-          .then((res) => res.json())
-          .then((data) => {
-            this.loading = false;
-            this.$router.push({ name: "Home" });
-          })
-          .catch((err) => {
-            console.log(err);
-            this.loading = false;
-          });
-      } catch (error) {
-        console.log(error);
-      }
+        .catch((err) => {
+          console.log(err);
+          this.loading = false;
+        });
     },
   },
 };
