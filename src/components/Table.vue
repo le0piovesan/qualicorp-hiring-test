@@ -26,9 +26,14 @@ export default {
 
       if (confirmation) {
         this.loading = true;
-        fetch(`http://localhost:8888/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          process.env.NODE_ENV === "development"
+            ? `http://localhost:8888/${id}`
+            : `https://qualicorp-hiring-test.herokuapp.com/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             this.loading = false;
@@ -112,7 +117,7 @@ export default {
     </div>
   </div>
 
-  <ModalUpdate v-if="userModal" :userid="userModal" @close="closeModal" />
+  <ModalUpdate v-if="userModal" :userData="userModal" @close="closeModal" />
 </template>
 
 <style scoped>

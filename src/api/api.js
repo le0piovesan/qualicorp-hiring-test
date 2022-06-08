@@ -3,6 +3,8 @@ const app = express();
 const model = require("./model");
 var cors = require("cors");
 
+const port = process.env.PORT || 8888;
+
 app.use(cors());
 
 app.use(express.json());
@@ -32,4 +34,4 @@ app.delete("/:id", async (req, res) => {
   res.json(result);
 });
 
-app.listen(8888);
+app.listen(port);

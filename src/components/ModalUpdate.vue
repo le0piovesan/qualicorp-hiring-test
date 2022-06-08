@@ -2,7 +2,7 @@
 import Loading from "@/components/Loading.vue";
 
 defineProps({
-  userid: {
+  userData: {
     type: Object,
     required: true,
   },
@@ -13,14 +13,14 @@ defineProps({
 export default {
   data() {
     return {
-      id: this.userid.id,
-      name: this.userid.name,
-      email: this.userid.email,
-      cpf: this.userid.cpf,
-      phone: this.userid.phone,
+      id: this.userData.id,
+      name: this.userData.name,
+      email: this.userData.email,
+      cpf: this.userData.cpf,
+      phone: this.userData.phone,
       ufList: [],
-      uf: this.userid.uf,
-      qualiClient: this.userid.qualiClient,
+      uf: this.userData.uf,
+      qualiClient: this.userData.qualiClient,
       loading: false,
     };
   },
@@ -49,11 +49,16 @@ export default {
         qualiClient: this.qualiClient,
       };
 
-      fetch(`http://localhost:8888/${this.userid.id}`, {
-        method: "PUT",
-        body: JSON.stringify(updateClient),
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-      })
+      fetch(
+        process.env.NODE_ENV === "development"
+          ? `http://localhost:8888/${this.userData.id}`
+          : `https://qualicorp-hiring-test.herokuapp.com/${this.userData.id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(updateClient),
+          headers: { "Content-type": "application/json; charset=UTF-8" },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           this.loading = false;

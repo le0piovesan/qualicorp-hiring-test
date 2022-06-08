@@ -12,7 +12,11 @@ export default {
     };
   },
   mounted() {
-    fetch("http://localhost:8888")
+    fetch(
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:8888"
+        : "https://qualicorp-hiring-test.herokuapp.com"
+    )
       .then((res) => res.json())
       .then((data) => {
         this.clients = data;
