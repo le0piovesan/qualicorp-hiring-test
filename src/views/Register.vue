@@ -118,7 +118,12 @@ export default {
       </option>
     </select>
 
-    <input type="checkbox" v-model="qualiClient" id="qualiClient" />
+    <input
+      type="checkbox"
+      :checked="qualiClient"
+      @change="(event) => (qualiClient = event.target.checked)"
+      id="qualiClient"
+    />
     <label for="qualiClient"
       >Cliente possui <span class="bold">quali</span>seguro</label
     >
