@@ -32,6 +32,10 @@ export default {
             : `https://qualicorp-hiring-test.herokuapp.com/${id}`,
           {
             method: "DELETE",
+            mode: "cors",
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+            },
           }
         )
           .then((res) => res.json())

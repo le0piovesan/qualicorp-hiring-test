@@ -48,7 +48,11 @@ export default {
         {
           method: "POST",
           body: JSON.stringify(newClient),
-          headers: { "Content-type": "application/json; charset=UTF-8" },
+          mode: "cors",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            "Access-Control-Allow-Origin": "*",
+          },
         }
       )
         .then((res) => res.json())
