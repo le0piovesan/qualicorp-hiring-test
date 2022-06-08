@@ -1,5 +1,6 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
+// import { RouterLink, RouterView } from "vue-router";
+import ModalUpdate from "@/components/ModalUpdate.vue";
 
 defineProps({
   listdata: {
@@ -11,6 +12,12 @@ defineProps({
 
 <script>
 export default {
+  data() {
+    return {
+      userModal: null,
+    };
+  },
+
   methods: {
     handleDelete(id, name) {
       const confirmation = confirm(
@@ -29,6 +36,9 @@ export default {
             console.log(err);
           });
       }
+    },
+    openModal(id) {
+      this.userModal = id;
     },
   },
 };
@@ -62,7 +72,12 @@ export default {
         /></RouterLink> -->
 
         <th class="todo-button">
-          <img src="../assets/edit.svg" alt="Edit" title="Editar Cliente" />
+          <img
+            src="../assets/edit.svg"
+            alt="Edit"
+            title="Editar Cliente"
+            @click="openModal(value.id)"
+          />
           <img
             src="../assets/delete.svg"
             alt="Delete"
@@ -78,6 +93,8 @@ export default {
     <br />
     <h3>Comece acessando a aba acima "Cadastrar Cliente".</h3>
   </div>
+
+  <ModalUpdate v-if="userModal" :userid="userModal" />
 </template>
 
 <style scoped>

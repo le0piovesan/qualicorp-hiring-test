@@ -25,7 +25,6 @@ body {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  font-weight: normal;
 }
 
 .container {
@@ -52,7 +51,7 @@ a {
   a:hover {
     background-color: #ffb81e45;
     transition: 0.4s;
-    border-radius: 5px;
+    border-radius: 20px;
   }
 }
 
