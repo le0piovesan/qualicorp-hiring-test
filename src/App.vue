@@ -6,7 +6,7 @@ import Logo from "@/components/Logo.vue";
 <template>
   <header>
     <div>
-      <Logo msg="Qualicorp" />
+      <Logo title="CRUD Clientes" />
 
       <nav>
         <RouterLink :to="{ name: 'Home' }">Home</RouterLink>

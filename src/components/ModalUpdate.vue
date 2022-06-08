@@ -6,9 +6,6 @@ defineProps({
     type: Object,
     required: true,
   },
-  reload: {
-    type: Function,
-  },
 });
 </script>
 
@@ -74,19 +71,33 @@ export default {
 <template>
   <div class="modal-container">
     <div class="modal">
-      <button type="button" class="close" @click="$emit('close')">X</button>
+      <button type="button" class="close" @click="$emit('close')">
+        X Fechar
+      </button>
       <form @submit.prevent="handleUpdate">
+        <h1>Detalhes do(a) cliente {{ name }}</h1>
         <label>Nome:</label>
         <input type="text" required v-model="name" ref="name" />
 
         <label>CPF:</label>
-        <input type="text" required v-model="cpf" />
+        <input
+          type="text"
+          required
+          v-model="cpf"
+          v-mask="'###.###.###-##'"
+          placeholder="Ex.: 000.000.000-00"
+        />
 
         <label>Email:</label>
         <input type="email" required v-model="email" />
 
         <label>Telefone:</label>
-        <input type="tel" required v-model="phone" />
+        <input
+          required
+          v-model="phone"
+          v-mask="'(##) #####-####'"
+          placeholder="Ex.: (00) 00000-0000"
+        />
 
         <label>Estado: </label>
         <select v-model="uf" required>
@@ -120,11 +131,14 @@ export default {
 }
 
 .modal {
-  width: 40%;
+  width: 60vw;
   padding: 20px;
   margin: auto;
   background: #fff;
   border-radius: 10px;
   text-align: center;
+}
+.close {
+  text-align: left;
 }
 </style>

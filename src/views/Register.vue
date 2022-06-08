@@ -66,13 +66,23 @@ export default {
     <input type="text" required v-model="name" ref="name" />
 
     <label>CPF:</label>
-    <input type="text" required v-model="cpf" />
+    <input
+      required
+      v-model="cpf"
+      v-mask="'###.###.###-##'"
+      placeholder="Ex.: 000.000.000-00"
+    />
 
     <label>Email:</label>
     <input type="email" required v-model="email" />
 
     <label>Telefone:</label>
-    <input type="tel" required v-model="phone" />
+    <input
+      required
+      v-model="phone"
+      v-mask="'(##) #####-####'"
+      placeholder="Ex.: (00) 00000-0000"
+    />
 
     <label>Estado: </label>
     <select v-model="uf" required>

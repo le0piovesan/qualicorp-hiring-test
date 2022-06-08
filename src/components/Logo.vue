@@ -1,6 +1,6 @@
 <script setup>
 defineProps({
-  msg: {
+  title: {
     type: String,
     required: true,
   },
@@ -9,7 +9,7 @@ defineProps({
 
 <template>
   <div class="greetings">
-    <h1 class="logo">{{ msg }}</h1>
+    <h1 class="logo">{{ title }}</h1>
     <h3>
       Teste CRUD para cadastro de clientes feito para
       <a target="_blank" href="https://www.qualicorp.com.br/">Qualicorp</a>
