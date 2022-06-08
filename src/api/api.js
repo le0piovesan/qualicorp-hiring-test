@@ -7,23 +7,6 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-  const allowedOrigins = [
-    "http://localhost:8888",
-    "https://qualicorp-hiring-test.netlify.app",
-  ];
-  const origin = req.headers.origin;
-  res.setHeader("Access-Control-Allow-Origin", origin);
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, OPTIONS, PATCH, DELETE, POST, PUT"
-  );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  return next();
-});
-
 const port = process.env.PORT || 8888;
 
 app.get("/", async (req, res) => {
