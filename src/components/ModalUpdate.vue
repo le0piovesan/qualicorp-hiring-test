@@ -55,6 +55,7 @@ export default {
           : `https://qualicorp-hiring-test.herokuapp.com/${this.userData.id}`,
         {
           method: "PUT",
+          headers: { "Content-type": "application/json; charset=UTF-8" },
           body: JSON.stringify(updateClient),
         }
       )
@@ -80,38 +81,62 @@ export default {
       </button>
       <form @submit.prevent="handleUpdate">
         <h1>Detalhes do(a) cliente {{ name }}</h1>
-        <label>Nome:</label>
-        <input type="text" required v-model="name" ref="name" />
-
-        <label>CPF:</label>
+        <label for="name">Nome:</label>
         <input
           type="text"
           required
-          v-model="cpf"
+          :value="name"
+          @input="(event) => (name = event.target.value)"
+          ref="name"
+          id="name"
+        />
+
+        <label for="cpf">CPF:</label>
+        <input
+          type="text"
+          required
+          :value="cpf"
+          @input="(event) => (cpf = event.target.value)"
           v-mask="'###.###.###-##'"
           placeholder="Ex.: 000.000.000-00"
+          id="cpf"
         />
 
-        <label>Email:</label>
-        <input type="email" required v-model="email" />
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          required
+          :value="email"
+          @input="(event) => (email = event.target.value)"
+          id="email"
+        />
 
-        <label>Telefone:</label>
+        <label for="phone">Telefone:</label>
         <input
           required
-          v-model="phone"
+          :value="phone"
+          @input="(event) => (phone = event.target.value)"
           v-mask="'(##) #####-####'"
           placeholder="Ex.: (00) 00000-0000"
+          id="phone"
         />
 
-        <label>Estado: </label>
-        <select v-model="uf" required>
+        <label for="uf">Estado: </label>
+        <select
+          :value="uf"
+          @input="(event) => (uf = event.target.value)"
+          required
+          id="uf"
+        >
           <option v-for="(value, index) in ufList" :key="index" :value="value">
             {{ value }}
           </option>
         </select>
 
-        <input type="checkbox" v-model="qualiClient" />
-        <label>Cliente possui <span class="bold">quali</span>seguro</label>
+        <input type="checkbox" v-model="qualiClient" id="qualiClient" />
+        <label for="qualiClient"
+          >Cliente possui <span class="bold">quali</span>seguro</label
+        >
 
         <div class="centered-text">
           <Loading v-if="loading" :loading="loading" />
