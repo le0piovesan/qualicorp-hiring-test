@@ -17,6 +17,8 @@ defineProps({
         <th scope="col">CPF</th>
         <th scope="col">Email</th>
         <th scope="col">Telefone</th>
+        <th scope="col">UF</th>
+        <th scope="col">Qualiseguro</th>
         <th scope="col">Ações</th>
       </tr>
     </thead>
@@ -26,6 +28,9 @@ defineProps({
         <th>{{ value.cpf }}</th>
         <th>{{ value.email }}</th>
         <th>{{ value.phone }}</th>
+        <th>{{ value.uf }}</th>
+        <th v-if="value.qualiClient">Possui</th>
+        <th v-else>Não Possui</th>
         <RouterLink :to="{ name: 'Update', params: { id: value.id } }"
           >Editar</RouterLink
         >
@@ -46,6 +51,6 @@ defineProps({
 }
 
 th {
-  font-size: 20px;
+  font-size: 18px;
 }
 </style>

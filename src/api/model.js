@@ -30,7 +30,7 @@ const createUser = async (user) => {
     await session.run(
       `CREATE (n:User {id: '${unique_id}', name: '${user.name}', 
       email: '${user.email}', cpf: '${user.cpf}', phone: '${user.phone}', 
-      uf: '${user.uf}', qualiClient: '${user.qualiClient}'} ) return n`
+      uf: '${user.uf}', qualiClient: ${user.qualiClient}} ) return n`
     );
 
     return await findById(unique_id);
@@ -43,7 +43,7 @@ const findAndUpdate = async (id, user) => {
   const result = await session.run(
     `MATCH (n:User {id: '${id}'}) SET n.name= '${user.name}', 
     n.email= '${user.email}', n.cpf= '${user.cpf}', n.phone= '${user.phone}', 
-    n.uf= '${user.uf}', n.qualiClient= '${user.qualiClient}' return n`
+    n.uf= '${user.uf}', n.qualiClient= ${user.qualiClient} return n`
   );
   return result.records[0].get("n").properties;
 };

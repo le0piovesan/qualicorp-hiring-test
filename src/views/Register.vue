@@ -1,3 +1,7 @@
+<script setup>
+import Loading from "@/components/Loading.vue";
+</script>
+
 <script>
 export default {
   data() {
@@ -9,6 +13,7 @@ export default {
       ufList: [],
       uf: "",
       qualiClient: true,
+      loading: false,
     };
   },
   mounted() {
@@ -16,7 +21,7 @@ export default {
       .then((res) => res.json())
       .then((data) => {
         data.forEach((element) => {
-          this.uf.push(element.sigla);
+          this.ufList.push(element.sigla);
         });
       })
       .catch((err) => console.warn(err));
@@ -25,16 +30,35 @@ export default {
   },
   methods: {
     handleSubmit() {
-      const newClient = {
-        name: this.name,
-        email: this.email,
-        cpf: this.cpf,
-        phone: this.phone,
-        uf: this.uf,
-        terms: this.terms,
-      };
-      console.log(newClient);
-      this.$router.push({ name: "Home" });
+      try {
+        this.loading = true;
+
+        const newClient = {
+          name: this.name,
+          email: this.email,
+          cpf: this.cpf,
+          phone: this.phone,
+          uf: this.uf,
+          qualiClient: this.qualiClient,
+        };
+
+        fetch("http://localhost:8888", {
+          method: "POST",
+          body: JSON.stringify(newClient),
+          headers: { "Content-type": "application/json; charset=UTF-8" },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            this.loading = false;
+            this.$router.push({ name: "Home" });
+          })
+          .catch((err) => {
+            console.log(err);
+            this.loading = false;
+          });
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
@@ -56,18 +80,17 @@ export default {
 
     <label>Estado: </label>
     <select v-model="uf" required>
-      <option v-for="(value, index) in ufList" :key="index" value="value">
+      <option v-for="(value, index) in ufList" :key="index" :value="value">
         {{ value }}
       </option>
     </select>
 
-    <div class="terms">
-      <input type="checkbox" required v-model="terms" />
-      <label>Cliente possui <span class="bold">quali</span>seguro</label>
-    </div>
+    <input type="checkbox" v-model="qualiClient" />
+    <label>Cliente possui <span class="bold">quali</span>seguro</label>
 
     <div class="centered-text">
-      <button>Cadastrar Cliente</button>
+      <Loading v-if="loading" :loading="loading" />
+      <button v-else>Cadastrar Cliente</button>
     </div>
   </form>
 </template>
