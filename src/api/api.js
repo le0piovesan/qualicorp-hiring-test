@@ -1,6 +1,11 @@
 const express = require("express");
 const app = express();
 const model = require("./model");
+const cors = require("cors");
+
+const corsOptions = { origin: process.env.URL || "*", credentials: true };
+
+app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
