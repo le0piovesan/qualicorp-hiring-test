@@ -16,6 +16,8 @@ export default {
     return {
       ufList: [],
       loading: false,
+      cpfError: false,
+      phoneError: false,
     };
   },
   mounted() {
@@ -32,7 +34,10 @@ export default {
   },
   methods: {
     handleSubmit() {
-      !this.user.id ? this.postSubmit(this.user) : this.putSubmit(this.user);
+      if (this.user.cpf.length < 14) this.cpfError = true;
+      else if (this.user.phone.length < 15) this.phoneError = true;
+      else
+        !this.user.id ? this.postSubmit(this.user) : this.putSubmit(this.user);
     },
   },
 };
@@ -60,6 +65,9 @@ export default {
       placeholder="000.000.000-00"
       id="user.cpf"
     />
+    <p v-if="cpfError && this.user.cpf.length < 14" class="error">
+      Por favor informe o CPF completo
+    </p>
 
     <label for="user.email">Email:</label>
     <input
@@ -79,6 +87,9 @@ export default {
       placeholder="(00) 00000-0000"
       id="user.phone"
     />
+    <p v-if="phoneError && this.user.phone.length < 15" class="error">
+      Por favor informe o número completo
+    </p>
 
     <label for="user.uf">Estado: </label>
     <select

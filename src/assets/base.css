@@ -36,6 +36,13 @@ form {
   border-radius: 10px;
 }
 
+.error {
+  margin-top: 5px;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: #ff0000;
+}
+
 .logo {
   color: #171a88;
 }

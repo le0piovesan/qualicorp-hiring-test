@@ -61,7 +61,11 @@ export default {
 
 <style scoped>
 .close {
-  margin: 20px;
+  color: #aaa;
+  top: 20px;
+  font-size: 1.8em;
+  font-weight: bold;
+  background-color: transparent;
 }
 .modal-container {
   position: fixed;
