@@ -14,6 +14,7 @@ defineProps({
 export default {
   data() {
     return {
+      userProperties: this.userData,
       loading: false,
     };
   },
@@ -54,7 +55,7 @@ export default {
         X Fechar
       </button>
 
-      <FormInput :userProperties="this.userData" :putSubmit="putSubmit" />
+      <FormInput :userProperties="userProperties" :putSubmit="putSubmit" />
     </div>
   </div>
 </template>
