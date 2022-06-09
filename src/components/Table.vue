@@ -36,8 +36,8 @@ export default {
         )
           .then((res) => res.json())
           .then((data) => {
-            this.loading = false;
             this.$router.go();
+            this.loading = false;
           })
           .catch((err) => {
             console.log(err);
@@ -76,23 +76,25 @@ export default {
 
       <tbody>
         <tr v-for="value in listdata" :key="value.id">
-          <th>{{ value.name }}</th>
-          <th>{{ value.cpf }}</th>
-          <th>{{ value.email }}</th>
-          <th>{{ value.phone }}</th>
-          <th>{{ value.uf }}</th>
-          <th v-if="value.qualiClient" class="client-quali">
-            <span>Cliente</span>
+          <td>{{ value.name }}</td>
+          <td>{{ value.cpf }}</td>
+          <td>{{ value.email }}</td>
+          <td>{{ value.phone }}</td>
+          <td>{{ value.uf }}</td>
+          <td v-if="value.qualiClient">
+            <div class="client-quali">
+              <span> Cliente </span>
 
-            <img
-              src="../assets/logo-quali.svg"
-              alt="Cliente"
-              title="Cliente Quali"
-            />
-          </th>
-          <th v-else>Não Possui</th>
+              <img
+                src="../assets/logo-quali.svg"
+                alt="Cliente"
+                title="Cliente Quali"
+              />
+            </div>
+          </td>
+          <td v-else>Não Possui</td>
 
-          <th class="todo-button">
+          <td class="todo-button">
             <img
               src="../assets/edit.svg"
               alt="Edit"
@@ -105,7 +107,7 @@ export default {
               title="Deletar Cliente"
               @click="handleDelete(value.id, value.name)"
             />
-          </th>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -121,18 +123,23 @@ export default {
 </template>
 
 <style scoped>
+table {
+  border-collapse: collapse;
+}
+
 #trheader th {
   font-weight: bold;
 }
 
-th {
-  font-size: 18px;
-  height: 40px;
+th,
+td {
+  height: 60px;
+  padding: 0px 5px;
+  border-bottom: 1px solid #ddd;
 }
 
 .client-quali {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
