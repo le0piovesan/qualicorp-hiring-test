@@ -35,7 +35,6 @@ export default {
         .then((res) => res.json())
         .then((data) => {
           this.$emit("close");
-          this.$router.go();
           this.loading = false;
         })
         .catch((err) => {
@@ -55,7 +54,7 @@ export default {
         X Fechar
       </button>
 
-      <FormInput :userProperties="userProperties" :putSubmit="putSubmit" />
+      <FormInput :user="userProperties" :putSubmit="putSubmit" />
     </div>
   </div>
 </template>

@@ -12,20 +12,25 @@ export default {
     };
   },
   mounted() {
-    fetch(
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:8888"
-        : "https://qualicorp-hiring-test.herokuapp.com"
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        this.clients = data;
-        this.loading = false;
-      })
-      .catch((err) => {
-        console.log(err);
-        this.loading = false;
-      });
+    this.getData();
+  },
+  methods: {
+    getData() {
+      fetch(
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:8888"
+          : "https://qualicorp-hiring-test.herokuapp.com"
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          this.clients = data;
+          this.loading = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          this.loading = false;
+        });
+    },
   },
 };
 </script>
@@ -35,6 +40,6 @@ export default {
     <div v-if="loading" class="mt">
       <Loading :loading="loading" />
     </div>
-    <Table v-else :listdata="clients" />
+    <Table v-else :listdata="clients" :updateComponent="getData" />
   </main>
 </template>

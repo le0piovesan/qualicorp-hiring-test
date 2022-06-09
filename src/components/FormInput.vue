@@ -1,7 +1,7 @@
 <script>
 export default {
   props: {
-    userProperties: {
+    user: {
       type: Object,
       required: true,
     },
@@ -14,14 +14,11 @@ export default {
   },
   data() {
     return {
-      user: {},
       ufList: [],
       loading: false,
     };
   },
   mounted() {
-    this.addUserProperties();
-
     fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
       .then((res) => res.json())
       .then((data) => {
@@ -34,9 +31,6 @@ export default {
     this.$refs.nameRef.focus();
   },
   methods: {
-    addUserProperties() {
-      this.user = Object.assign({}, this.userProperties);
-    },
     handleSubmit() {
       !this.user.id ? this.postSubmit(this.user) : this.putSubmit(this.user);
     },

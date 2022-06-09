@@ -34,8 +34,8 @@ export default {
       )
         .then((res) => res.json())
         .then((data) => {
-          this.$router.push({ name: "Home" });
           this.loading = false;
+          this.$router.push({ name: "Home" });
         })
         .catch((err) => {
           this.loading = false;
@@ -50,5 +50,5 @@ export default {
   <div v-if="loading" class="mt">
     <Loading :loading="loading" />
   </div>
-  <FormInput v-else :userProperties="userProperties" :postSubmit="postSubmit" />
+  <FormInput v-else :user="userProperties" :postSubmit="postSubmit" />
 </template>

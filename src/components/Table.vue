@@ -7,6 +7,7 @@ defineProps({
     type: Array,
     required: true,
   },
+  updateComponent: { type: Function },
 });
 </script>
 
@@ -17,6 +18,11 @@ export default {
       userModal: null,
       loading: false,
     };
+  },
+  watch: {
+    userModal() {
+      this.updateComponent();
+    },
   },
   methods: {
     handleDelete(id, name) {
@@ -36,8 +42,8 @@ export default {
         )
           .then((res) => res.json())
           .then((data) => {
-            this.$router.go();
             this.loading = false;
+            this.updateComponent();
           })
           .catch((err) => {
             console.log(err);
