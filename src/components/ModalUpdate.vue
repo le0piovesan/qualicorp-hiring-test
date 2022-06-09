@@ -47,9 +47,9 @@ export default {
 </script>
 
 <template>
-  <div class="modal-container">
+  <div class="modal-container" @click="$emit('close')">
     <Loading v-if="loading" :loading="loading" />
-    <div v-else class="modal">
+    <div v-else class="modal" @click.stop>
       <button type="button" class="close" @click="$emit('close')">
         X Fechar
       </button>
@@ -61,12 +61,15 @@ export default {
 
 <style scoped>
 .close {
-  color: #aaa;
-  top: 20px;
-  font-size: 1.8em;
+  color: #000;
   font-weight: bold;
-  background-color: transparent;
+  background-color: #fff;
 }
+.close:hover {
+  opacity: 0.4;
+  transition: 0.8s ease;
+}
+
 .modal-container {
   position: fixed;
   top: 0;
@@ -81,11 +84,7 @@ export default {
 .modal {
   width: 50vw;
   margin: auto;
-  background: #fff;
   border-radius: 10px;
   text-align: center;
-}
-.close {
-  text-align: left;
 }
 </style>
