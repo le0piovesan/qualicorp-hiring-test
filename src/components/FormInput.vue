@@ -103,17 +103,16 @@ export default {
       </option>
     </select>
 
-    <div class="checkbox-container">
+    <label class="checkbox-container" for="user.qualiClient"
+      >Cliente possui <span class="bold">quali</span>seguro
       <input
         type="checkbox"
         :checked="user.qualiClient"
         @change="(event) => (user.qualiClient = event.target.checked)"
         id="user.qualiClient"
       />
-      <label for="user.qualiClient"
-        >Cliente possui <span class="bold">quali</span>seguro</label
-      >
-    </div>
+      <span class="checkmark"></span>
+    </label>
 
     <div class="centered-text">
       <button v-if="this.user.id">Atualizar Cliente</button>
