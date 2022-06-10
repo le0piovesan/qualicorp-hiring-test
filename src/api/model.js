@@ -1,15 +1,16 @@
 var neo4j = require("neo4j-driver");
 const { v4: uuidv4 } = require("uuid");
+require("dotenv").config();
 
 const driver = neo4j.driver(
-  "bolt://34.204.3.238:7687",
-  neo4j.auth.basic("neo4j", "bigamy-groups-portions"),
+  process.env.BOLT_URL,
+  neo4j.auth.basic(process.env.USERNAME, process.env.PASSWORD),
   {
     /* encrypted: 'ENCRYPTION_OFF' */
   }
 );
 
-const session = driver.session({ database: "neo4j" });
+const session = driver.session({ database: process.env.DATABASE });
 
 const findAll = async () => {
   const result = await session.run(
