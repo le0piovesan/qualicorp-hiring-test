@@ -82,12 +82,12 @@ export default {
 
       <tbody>
         <tr v-for="value in listdata" :key="value.id">
-          <td>{{ value.name }}</td>
-          <td>{{ value.cpf }}</td>
-          <td>{{ value.email }}</td>
-          <td>{{ value.phone }}</td>
-          <td>{{ value.uf }}</td>
-          <td v-if="value.qualiClient">
+          <td data-label="Nome">{{ value.name }}</td>
+          <td data-label="CPF">{{ value.cpf }}</td>
+          <td data-label="Email">{{ value.email }}</td>
+          <td data-label="Telefone">{{ value.phone }}</td>
+          <td data-label="UF">{{ value.uf }}</td>
+          <td data-label="Qualiseguro" v-if="value.qualiClient">
             <div class="client-quali">
               <span> Cliente </span>
 
@@ -98,9 +98,9 @@ export default {
               />
             </div>
           </td>
-          <td v-else>Não Possui</td>
+          <td data-label="Qualiseguro" v-else>Não Possui</td>
 
-          <td class="todo-button">
+          <td data-label="Ações" class="todo-button">
             <img
               src="../assets/edit.svg"
               alt="Edit"
@@ -127,30 +127,3 @@ export default {
 
   <ModalUpdate v-if="userModal" :userData="userModal" @close="closeModal" />
 </template>
-
-<style scoped>
-table {
-  border-collapse: collapse;
-}
-
-#trheader th {
-  font-weight: bold;
-}
-
-th,
-td {
-  height: 60px;
-  padding: 0px 5px;
-  border-bottom: 1px solid #ddd;
-}
-
-.client-quali {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.client-quali span {
-  padding-right: 5px;
-}
-</style>

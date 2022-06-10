@@ -211,3 +211,83 @@ button {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+table {
+  border-collapse: collapse;
+}
+
+#trheader th {
+  font-weight: bold;
+}
+
+th,
+td {
+  height: 60px;
+  padding: 0px 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+.client-quali {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.client-quali span {
+  padding-right: 5px;
+}
+
+.modal-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+}
+
+.modal {
+  width: 70vw;
+  margin: auto;
+  border-radius: 10px;
+  text-align: center;
+}
+
+@media screen and (max-width: 800px) {
+  table thead {
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+    position: absolute;
+  }
+
+  table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 45px;
+  }
+
+  .todo-button {
+    justify-content: center;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+  }
+
+  tbody tr td:last-child {
+    border-bottom: 15px solid #eee;
+  }
+
+  .modal {
+    width: 90vw;
+  }
+
+  form {
+    margin: 5px auto;
+  }
+}
