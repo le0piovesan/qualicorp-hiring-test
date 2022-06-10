@@ -12,13 +12,15 @@ const driver = neo4j.driver(
 const session = driver.session({ database: "neo4j" });
 
 const findAll = async () => {
-  const result = await session.run(`MATCH (n) RETURN (n)`);
+  const result = await session.run(
+    `MATCH (n) RETURN (n) ORDER BY n.createdAt ASC`
+  );
   return result.records.map((i) => i.get("n").properties);
 };
 
 const findById = async (id) => {
   const result = await session.run(
-    `MATCH (n:User {id: '${id}'} ) return n limit 1`
+    `MATCH (n:User {id: '${id}'} ) RETURN n LIMIT 1`
   );
   return result.records[0].get("n").properties;
 };
@@ -30,7 +32,9 @@ const createUser = async (user) => {
     await session.run(
       `CREATE (n:User {id: '${unique_id}', name: '${user.name}', 
       email: '${user.email}', cpf: '${user.cpf}', phone: '${user.phone}', 
-      uf: '${user.uf}', qualiClient: ${user.qualiClient}} ) return n`
+      uf: '${user.uf}', qualiClient: ${
+        user.qualiClient
+      }, createdAt: ${JSON.stringify(new Date())} } ) RETURN n`
     );
 
     return await findById(unique_id);
@@ -43,7 +47,7 @@ const findAndUpdate = async (id, user) => {
   const result = await session.run(
     `MATCH (n:User {id: '${id}'}) SET n.name= '${user.name}', 
     n.email= '${user.email}', n.cpf= '${user.cpf}', n.phone= '${user.phone}', 
-    n.uf= '${user.uf}', n.qualiClient= ${user.qualiClient} return n`
+    n.uf= '${user.uf}', n.qualiClient= ${user.qualiClient} RETURN n`
   );
   return result.records[0].get("n").properties;
 };
